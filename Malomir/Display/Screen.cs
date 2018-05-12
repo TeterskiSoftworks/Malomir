@@ -11,12 +11,20 @@ namespace Malomir.Display {
 
 		#region Declorations
 
-		/// <summary> Gets or sets the width in <seealso cref="Symbol"/>s. </summary> <value> The width. </value>
+		/// <summary>
+		/// Gets or sets the width in <seealso cref="Symbol"/>s.
+		/// </summary>
+		/// <value> The width. </value>
 		private static int Width { get; set; } = 16;
-		/// <summary> Gets or sets the height in <seealso cref="Symbol"/>s. </summary> <value> The height. </value>
+		/// <summary>
+		/// Gets or sets the height in <seealso cref="Symbol"/>s.
+		/// </summary> <value> The height. </value>
 		private static int Height { get; set; } = 16;
 
-		/// <summary> Gets the tileset used. </summary> <value> The tileset. </value>
+		/// <summary>
+		/// Gets the tileset used.
+		/// </summary>
+		/// <value> The tileset. </value>
 		public static Texture2D Tileset { get; private set; }
 
 		/// <summary>
@@ -51,6 +59,18 @@ namespace Malomir.Display {
 					symbols[y, x] = new Symbol(y, x, Symbol.ASCII.Nul);
 				}
 			}
+
+			SymbolAt(0, 0).Foreground = Symbol.ASCII.UppercaseH;
+			SymbolAt(0, 1).Foreground = Symbol.ASCII.LowercaseE;
+			SymbolAt(0, 2).Foreground = Symbol.ASCII.LowercaseL;
+			SymbolAt(0, 3).Foreground = Symbol.ASCII.LowercaseL;
+			SymbolAt(0, 4).Foreground = Symbol.ASCII.LowercaseO;
+
+			SymbolAt(0, 6).Foreground = Symbol.ASCII.UppercaseW;
+			SymbolAt(0, 7).Foreground = Symbol.ASCII.LowercaseO;
+			SymbolAt(0, 8).Foreground = Symbol.ASCII.LowercaseR;
+			SymbolAt(0, 9).Foreground = Symbol.ASCII.LowercaseL;
+			SymbolAt(0, 10).Foreground = Symbol.ASCII.LowercaseD;
 
 		}
 

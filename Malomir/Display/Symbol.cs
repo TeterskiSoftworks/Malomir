@@ -20,6 +20,15 @@ namespace Malomir.Display {
 		/// </summary>
 		public static int Height { get; private set; } = 32;
 
+		/// <summary>
+		/// The X position of the symbol in the <see cref="Screen"/>.
+		/// </summary>
+		public int X { get => destination.X; }
+
+		/// <summary>
+		/// The Y position of the symbol in the <see cref="Screen"/>.
+		/// </summary>
+		public int Y { get => destination.Y; }
 
 		/// <summary>
 		/// The pixel size of each symbol of the tileset.
@@ -32,9 +41,9 @@ namespace Malomir.Display {
 		private Rectangle destination;
 
 		/// <summary>
-		/// Determines the foreground image to be displayed from the tileset.
+		/// Gets or sets the foreground image to be displayed from the tileset.
 		/// </summary>
-		private Rectangle foreground;
+		public Rectangle Foreground { get; set; }
 
 		/// <summary>
 		/// The background color of the <see cref="Symbol"/>.
@@ -57,7 +66,7 @@ namespace Malomir.Display {
 			FGColor = Color.White;
 
 			destination = new Rectangle(x * Width, y * Height, Width, Height);
-			foreground = ASCII.Nul;
+			Foreground = ASCII.Nul;
 			//foreground = new Rectangle(x * tilesetWidth, y * tilesetHeight, tilesetWidth, tilesetHeight);
 		}
 
@@ -66,35 +75,18 @@ namespace Malomir.Display {
 			FGColor = Color.White;
 
 			destination = new Rectangle(x * Width, y * Height, Width, Height);
-			this.foreground = foreground;
+			Foreground = foreground;
 
 
 		}
-
-
 
 		/// <summary>
 		/// Draws the symbol on the <see cref="Screen"/>.
 		/// </summary>
 		public void Draw() {
 			Main.SpriteBatch.Draw(Screen.Tileset, destination, ASCII.FullBlock, BGColor);
-			Main.SpriteBatch.Draw(Screen.Tileset, destination, foreground, FGColor);
+			Main.SpriteBatch.Draw(Screen.Tileset, destination, Foreground, FGColor);
 		}
-
-		/// <summary>
-		/// The X position of the symbol in the <see cref="Screen"/>.
-		/// </summary>
-		public int X {
-			get => destination.X;
-		}
-
-		/// <summary>
-		/// The Y position of the symbol in the <see cref="Screen"/>.
-		/// </summary>
-		public int Y {
-			get => destination.Y;
-		}
-
 
 		/// <summary>
 		/// Contains the locations (as <see cref="Microsoft.Xna.Framework.Rectangle"/>s) of each tileset symbol.
