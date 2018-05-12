@@ -12,9 +12,9 @@ namespace Malomir.Display {
 		#region Declorations
 
 		/// <summary> Gets or sets the width in <seealso cref="Symbol"/>s. </summary> <value> The width. </value>
-		private static int Width  { get; set; }
+		private static int Width { get; set; } = 16;
 		/// <summary> Gets or sets the height in <seealso cref="Symbol"/>s. </summary> <value> The height. </value>
-		private static int Height { get; set; }
+		private static int Height { get; set; } = 16;
 
 		/// <summary> Gets the tileset used. </summary> <value> The tileset. </value>
 		public static Texture2D Tileset { get; private set; }
@@ -29,7 +29,7 @@ namespace Malomir.Display {
 		/// <param name="graphics"> The <see cref="GraphicsDeviceManager"/> used in <see cref="Main"/>. </param>
 		/// <remarks> The default width and height are 16 <see cref="Symbol"/>s. </remarks>
 		public static void Init(GraphicsDeviceManager graphics) {
-			Init(16, 16, graphics);
+			Init(Width, Height, graphics);
 		}
 
 		/// <summary> Initializes the <seealso cref="Screen"/> with the specified settings. </summary>
@@ -48,7 +48,7 @@ namespace Malomir.Display {
 
 			for (int y = 0; y < Height; y++) {
 				for (int x = 0; x < Width; x++) {
-					symbols[y, x] = new Symbol(y, x);
+					symbols[y, x] = new Symbol(y, x, Symbol.ASCII.Nul);
 				}
 			}
 
