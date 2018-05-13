@@ -42,8 +42,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Display\Border.cs" />
     <Compile Include="Display\Screen.cs" />
     <Compile Include="Display\Symbol.cs" />
+    <Compile Include="Display\SymbolString.cs" />
+    <Compile Include="Display\Window.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

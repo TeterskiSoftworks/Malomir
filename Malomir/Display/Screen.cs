@@ -15,11 +15,11 @@ namespace Malomir.Display {
 		/// Gets or sets the width in <seealso cref="Symbol"/>s.
 		/// </summary>
 		/// <value> The width. </value>
-		private static int Width { get; set; } = 16;
+		public static int Width { get; private set; } = 32;
 		/// <summary>
 		/// Gets or sets the height in <seealso cref="Symbol"/>s.
 		/// </summary> <value> The height. </value>
-		private static int Height { get; set; } = 16;
+		public static int Height { get; private set; } = 32;
 
 		/// <summary>
 		/// Gets the tileset used.
@@ -31,7 +31,12 @@ namespace Malomir.Display {
 		/// A 2D array of <seealso cref="Symbol"/>s used to represent a terminal like <seealso cref="Screen"/>.
 		/// </summary>
 		private static Symbol[,] symbols;
+
+
+		private static Window window;
+
 		#endregion
+
 
 		/// <summary> Initializes the <see cref="Screen"/> to default settings. </summary>
 		/// <param name="graphics"> The <see cref="GraphicsDeviceManager"/> used in <see cref="Main"/>. </param>
@@ -49,29 +54,20 @@ namespace Malomir.Display {
 			Height = height;
 			
 			symbols = new Symbol[Height, Width];
-
+			
 			graphics.PreferredBackBufferHeight = Height * Symbol.Height;
 			graphics.PreferredBackBufferWidth = Width * Symbol.Width;
 			graphics.ApplyChanges();
 
 			for (int y = 0; y < Height; y++) {
 				for (int x = 0; x < Width; x++) {
-					symbols[y, x] = new Symbol(y, x, Symbol.ASCII.Nul);
+					symbols[y, x] = new Symbol(x, y, Symbol.ASCII.Nul);
 				}
 			}
 
-			SymbolAt(0, 0).Foreground = Symbol.ASCII.UppercaseH;
-			SymbolAt(0, 1).Foreground = Symbol.ASCII.LowercaseE;
-			SymbolAt(0, 2).Foreground = Symbol.ASCII.LowercaseL;
-			SymbolAt(0, 3).Foreground = Symbol.ASCII.LowercaseL;
-			SymbolAt(0, 4).Foreground = Symbol.ASCII.LowercaseO;
-
-			SymbolAt(0, 6).Foreground = Symbol.ASCII.UppercaseW;
-			SymbolAt(0, 7).Foreground = Symbol.ASCII.LowercaseO;
-			SymbolAt(0, 8).Foreground = Symbol.ASCII.LowercaseR;
-			SymbolAt(0, 9).Foreground = Symbol.ASCII.LowercaseL;
-			SymbolAt(0, 10).Foreground = Symbol.ASCII.LowercaseD;
-
+			window = new Window(3, 3, 20, 16, "Hello World!") {
+				BGColor = Color.Red
+			};
 		}
 
 		/// <summary> Loads the tileset. </summary>
@@ -84,6 +80,7 @@ namespace Malomir.Display {
 		/// Draws all the <see cref="Symbol"/>s of the <see cref="Screen"/>.
 		/// </summary>
 		public static void Draw() {
+
 			for (int y = 0; y < Height; y++) {
 				for (int x = 0; x < Width; x++) {
 					symbols[y, x].Draw();
@@ -99,8 +96,6 @@ namespace Malomir.Display {
 		public static Symbol SymbolAt(int x, int y) {
 			return symbols[y, x];
 		}
-
-
 
 	}
 }

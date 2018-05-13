@@ -25,6 +25,7 @@ namespace Malomir {
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize() {
+
 			Screen.Init(graphics);
 			base.Initialize();
 		}

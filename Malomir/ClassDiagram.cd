@@ -1,28 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Malomir.Display.Screen" Collapsed="true">
-    <Position X="5.5" Y="5" Width="1.5" />
+    <Position X="4.25" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAEAABAEAAgAAAAAAAEAAAAAgAAAAAAACAACAAAA=</HashCode>
       <FileName>Display\Screen.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Malomir.Display.Symbol" Collapsed="true">
-    <Position X="5.5" Y="5.75" Width="1.5" />
+    <Position X="4.25" Y="6.75" Width="2" />
+    <NestedTypes>
+      <Struct Name="Malomir.Display.Symbol.ASCII" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Display\Symbol.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAgAgQAQAAAAEAAAAARAAEAAAAABAAgYAA=</HashCode>
+      <HashCode>AAAAACAABAAAAgAAAAAAAEAAAAARAAEAAAAABAAgYAA=</HashCode>
       <FileName>Display\Symbol.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Malomir.Display.Window" Collapsed="true">
+    <Position X="4.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Display\Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Malomir.Main" Collapsed="true">
-    <Position X="5.5" Y="4" Width="2.5" />
+    <Position X="4.25" Y="3.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAQAEAAAAAAAAwAAAAAAAAAAAAAAAAgAQAAAAAAAAAQ=</HashCode>
       <FileName>Main.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Malomir.Program" Collapsed="true">
-    <Position X="5.5" Y="3.25" Width="1.5" />
+    <Position X="4.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>

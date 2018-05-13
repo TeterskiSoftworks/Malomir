@@ -6,19 +6,19 @@ namespace Malomir.Display {
 	/// The smallest element that can be displayed on <see cref="Screen"/>.
 	/// Think of it as a character on a terminal.
 	/// </summary>
-	public class Symbol {
+	public class Symbol{
 
 		#region Declorations
 
 		/// <summary>
 		/// The pixel width of each symbol.
 		/// </summary>
-		public static int Width { get; private set; } = 32;
+		public static int Width { get; private set; } = 16;
 
 		/// <summary>
 		/// The pixel height of each symbol.
 		/// </summary>
-		public static int Height { get; private set; } = 32;
+		public static int Height { get; private set; } = 16;
 
 		/// <summary>
 		/// The X position of the symbol in the <see cref="Screen"/>.
@@ -44,6 +44,11 @@ namespace Malomir.Display {
 		/// Gets or sets the foreground image to be displayed from the tileset.
 		/// </summary>
 		public Rectangle Foreground { get; set; }
+
+		/// <summary>
+		/// Gets or sets the foreground image to be displayed from the tileset.
+		/// </summary>
+		public Rectangle Background { get; set; } = ASCII.FullBlock;
 
 		/// <summary>
 		/// The background color of the <see cref="Symbol"/>.
@@ -84,7 +89,7 @@ namespace Malomir.Display {
 		/// Draws the symbol on the <see cref="Screen"/>.
 		/// </summary>
 		public void Draw() {
-			Main.SpriteBatch.Draw(Screen.Tileset, destination, ASCII.FullBlock, BGColor);
+			Main.SpriteBatch.Draw(Screen.Tileset, destination, Background, BGColor);
 			Main.SpriteBatch.Draw(Screen.Tileset, destination, Foreground, FGColor);
 		}
 
@@ -588,7 +593,7 @@ namespace Malomir.Display {
 			/// <summary>α</summary>
 			public static Rectangle Alpha { get; } = new Rectangle(0 * tilesetWidth, 14 * tilesetHeight, tilesetWidth, tilesetHeight);
 			/// <summary>ß</summary>
-			public static Rectangle Betaa { get; } = new Rectangle(1 * tilesetWidth, 14 * tilesetHeight, tilesetWidth, tilesetHeight);
+			public static Rectangle Beta { get; } = new Rectangle(1 * tilesetWidth, 14 * tilesetHeight, tilesetWidth, tilesetHeight);
 			/// <summary>Γ</summary>
 			public static Rectangle Gamma { get; } = new Rectangle(2 * tilesetWidth, 14 * tilesetHeight, tilesetWidth, tilesetHeight);
 			/// <summary>π</summary>
@@ -656,3 +661,4 @@ namespace Malomir.Display {
 		}
 	}
 }
+
