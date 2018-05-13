@@ -12,14 +12,12 @@ namespace Malomir.Display {
 		#region Declorations
 
 		/// <summary>
-		/// Gets or sets the width in <seealso cref="Symbol"/>s.
-		/// </summary>
-		/// <value> The width. </value>
-		public static int Width { get; private set; } = 32;
-		/// <summary>
-		/// Gets or sets the height in <seealso cref="Symbol"/>s.
+		/// Gets or sets the size in <seealso cref="Symbol"/>s.
 		/// </summary> <value> The height. </value>
-		public static int Height { get; private set; } = 32;
+		public static Point Size { get; private set; } = new Point{X = 32, Y = 32};
+
+		public static Point Min { get => Point.Zero; }
+		public static Point Max { get => Size; }
 
 		/// <summary>
 		/// Gets the tileset used.
@@ -42,30 +40,29 @@ namespace Malomir.Display {
 		/// <param name="graphics"> The <see cref="GraphicsDeviceManager"/> used in <see cref="Main"/>. </param>
 		/// <remarks> The default width and height are 16 <see cref="Symbol"/>s. </remarks>
 		public static void Init(GraphicsDeviceManager graphics) {
-			Init(Width, Height, graphics);
+			Init(Size, graphics);
 		}
 
 		/// <summary> Initializes the <seealso cref="Screen"/> with the specified settings. </summary>
 		/// <param name="width"> The width. </param>
 		/// <param name="height"> The height. </param>
 		/// <param name="graphics"> The <see cref="GraphicsDeviceManager"/> used in <see cref="Main"/>. </param>
-		public static void Init(int width, int height, GraphicsDeviceManager graphics) {
-			Width = width;
-			Height = height;
+		public static void Init(Point size, GraphicsDeviceManager graphics) {
+			Size = size;
 			
-			symbols = new Symbol[Height, Width];
+			symbols = new Symbol[Size.Y, Size.X];
 			
-			graphics.PreferredBackBufferHeight = Height * Symbol.Height;
-			graphics.PreferredBackBufferWidth = Width * Symbol.Width;
+			graphics.PreferredBackBufferHeight = Size.Y * Symbol.Height;
+			graphics.PreferredBackBufferWidth = Size.X * Symbol.Width;
 			graphics.ApplyChanges();
 
-			for (int y = 0; y < Height; y++) {
-				for (int x = 0; x < Width; x++) {
+			for (int y = 0; y < Size.Y; y++) {
+				for (int x = 0; x < Size.X; x++) {
 					symbols[y, x] = new Symbol(x, y, Symbol.ASCII.Nul);
 				}
 			}
 
-			window = new Window(3, 3, 20, 16, "Hello World!") {
+			window = new Window(Point.Zero, Size.Move(-1, -1), Min, Max, "Hello World!") {
 				BGColor = Color.Red
 			};
 		}
@@ -81,8 +78,8 @@ namespace Malomir.Display {
 		/// </summary>
 		public static void Draw() {
 
-			for (int y = 0; y < Height; y++) {
-				for (int x = 0; x < Width; x++) {
+			for (int y = 0; y < Size.Y; y++) {
+				for (int x = 0; x < Size.X; x++) {
 					symbols[y, x].Draw();
 				}
 			}

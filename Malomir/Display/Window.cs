@@ -7,10 +7,11 @@ namespace Malomir.Display {
 
 	public class Window {
 
-		public int X { get; set; } = 0;
-		public int Y { get; set; } = 0;
-		public int Width { get; private set; } = 4;
-		public int Height { get; private set; } = 4;
+
+		public Point Origin { get; set; } = new Point { X = 0, Y = 0 };
+		public Point Size { get; set; } = new Point { X = 0, Y = 0};
+		public Point Min { get; set; } = new Point { X = 0, Y = 0 };
+		public Point Max { get; set; } = new Point { X = 0, Y = 0 };
 
 		public Color FGColor { get; set; } = Color.White;
 		public Color BGColor { get; set; } = Color.Red;
@@ -26,20 +27,14 @@ namespace Malomir.Display {
 		public Window() {
 		}
 
+		public Window(Point origin, Point size, Point min, Point max, String name) {
 
-		public Window(int x, int y, int width, int height) {
-			X = x;
-			Y = y;
-			Width = width - 1;
-			Height = height - 1;
-		}
+			Origin = origin;
+			Size = size;
+			Min = min;
+			Max = max;
 
-		public Window(int x, int y, int width, int height, String name) {
-			X = x;
-			Y = y;
-			Width = width - 1;
-			Height = height - 1;
-			Name = new SymbolString(x + 1, y, Width - 2, name) {
+			Name = new SymbolString(Origin.Move(1, 0), Min, Max, Size.X - 2, name) {
 				BGColor = Border.FGColor,
 				FGColor = Border.BGColor
 			};
@@ -56,11 +51,11 @@ namespace Malomir.Display {
 			}
 		}
 
-
 		private void ReDrawBackground() {
 
-			for(int y = (Y > 0 ? Y : 0); (y < Y + Height) && (y < Screen.Height); y++) {
-				for(int x = (X > 0 ? X : 0);  (x < X + Width) && (x < Screen.Width); x++) {
+			for(int y = (Origin.Y > Min.Y ? Origin.Y : Min.Y); (y < Origin.Y + Size.Y) && (y < Max.Y); y++) {
+
+				for (int x = (Origin.X > Min.X ? Origin.X : Min.X);  (x < Origin.X + Size.X) && (x < Max.X); x++) {
 					Screen.SymbolAt(x, y).BGColor = BGColor;
 					Screen.SymbolAt(x, y).FGColor = FGColor;
 					Screen.SymbolAt(x, y).Foreground = Foreground;
@@ -75,74 +70,76 @@ namespace Malomir.Display {
 
 			if (!Border.Enabled) return;
 
-			//top and bottom
-			for (int i = ( X + 1 > 0 ? X + 1: 0); (i < X + Width) && (i < Screen.Width); i++) {
-
-				if (Y + Height < Screen.Height && Y + Height >= 0) {
-					Screen.SymbolAt(i, Y + Height).Foreground = Border.Bottom;
-					Screen.SymbolAt(i, Y + Height).FGColor = Border.FGColor;
-					Screen.SymbolAt(i, Y + Height).BGColor = Border.BGColor;
-				}
-
-				if (Y < 0) continue;
-				if (Y >= Screen.Height) continue;
-				if (i < X + Name.Length + 1) continue;
-				Screen.SymbolAt(i, Y).Foreground = Border.Top;
-				Screen.SymbolAt(i, Y).FGColor = Border.FGColor;
-				Screen.SymbolAt(i, Y).BGColor = Border.BGColor;
-			}
 			Name.Draw();
 
-			//left and right
-			for (int i = (Y + 1 > 0 ? Y + 1 : 0); (i < Y + Height) && (i < Screen.Height); i++) {
+			//top and bottom
+			for (int i = (Origin.X + 1 > Min.X ? Origin.X + 1: Min.X); (i < Origin.X + Size.X) && (i < Max.X); i++) {
 
-				if (X + Width < Screen.Width && X + Width >= 0) {
-					Screen.SymbolAt(X + Width, i).Foreground = Border.Right;
-					Screen.SymbolAt(X + Width, i).FGColor = Border.FGColor;
-					Screen.SymbolAt(X + Width, i).BGColor = Border.BGColor;
+				if (Origin.Y + Size.Y < Max.Y && Origin.Y + Size.Y >= Min.Y) {
+					Screen.SymbolAt(i, Origin.Y + Size.Y).Foreground = Border.Bottom;
+					Screen.SymbolAt(i, Origin.Y + Size.Y).FGColor = Border.FGColor;
+					Screen.SymbolAt(i, Origin.Y + Size.Y).BGColor = Border.BGColor;
 				}
 
-				if (X < 0) continue;
-				if (X >= Screen.Width) continue;
-				Screen.SymbolAt(X, i).Foreground = Border.Left;
-				Screen.SymbolAt(X, i).FGColor = Border.FGColor;
-				Screen.SymbolAt(X, i).BGColor = Border.BGColor;
+				if (Origin.Y < Min.Y) continue;
+				if (Origin.Y >= Max.Y) continue;
+				if (i < Origin.X + Name.Length + 1) continue;
+				Screen.SymbolAt(i, Origin.Y).Foreground = Border.Top;
+				Screen.SymbolAt(i, Origin.Y).FGColor = Border.FGColor;
+				Screen.SymbolAt(i, Origin.Y).BGColor = Border.BGColor;
+			}
+			
+
+			//left and right
+			for (int i = (Origin.Y + 1 > Min.Y ? Origin.Y + 1 : Min.Y); (i < Origin.Y + Size.Y) && (i < Max.Y); i++) {
+
+				if (Origin.X + Size.X < Max.X && Origin.X + Size.X >= Min.X) {
+					Screen.SymbolAt(Origin.X + Size.X, i).Foreground = Border.Right;
+					Screen.SymbolAt(Origin.X + Size.X, i).FGColor = Border.FGColor;
+					Screen.SymbolAt(Origin.X + Size.X, i).BGColor = Border.BGColor;
+				}
+
+				if (Origin.X < Min.X) continue;
+				if (Origin.X >= Max.X) continue;
+				Screen.SymbolAt(Origin.X, i).Foreground = Border.Left;
+				Screen.SymbolAt(Origin.X, i).FGColor = Border.FGColor;
+				Screen.SymbolAt(Origin.X, i).BGColor = Border.BGColor;
 
 
 			}
 
 			#region Corners
-			if (X <= Screen.Width) {
+			if (Origin.X <= Max.X) {
 
-				if (X >= 0) {
-					if (Y >= 0 && Y < Screen.Height) {
-						Screen.SymbolAt(X, Y).Foreground = Border.TopLeft;
-						Screen.SymbolAt(X, Y).FGColor = Border.FGColor;
-						Screen.SymbolAt(X, Y).BGColor = Border.BGColor;
+				if (Origin.X >= Min.X) {
+					if (Origin.Y >= Min.Y && Origin.Y < Max.Y) {
+						Screen.SymbolAt(Origin.X, Origin.Y).Foreground = Border.TopLeft;
+						Screen.SymbolAt(Origin.X, Origin.Y).FGColor = Border.FGColor;
+						Screen.SymbolAt(Origin.X, Origin.Y).BGColor = Border.BGColor;
 					}
 
-					if (Y + Height < Screen.Height && Y + Height >= 0) {
-						Screen.SymbolAt(X, Y + Height).Foreground = Border.BottomLeft;
-						Screen.SymbolAt(X, Y + Height).FGColor = Border.FGColor;
-						Screen.SymbolAt(X, Y + Height).BGColor = Border.BGColor;
+					if (Origin.Y + Size.Y < Max.Y && Origin.Y + Size.Y >= 0) {
+						Screen.SymbolAt(Origin.X, Origin.Y + Size.Y).Foreground = Border.BottomLeft;
+						Screen.SymbolAt(Origin.X, Origin.Y + Size.Y).FGColor = Border.FGColor;
+						Screen.SymbolAt(Origin.X, Origin.Y + Size.Y).BGColor = Border.BGColor;
 					}
 				}
 			}
 
-			if (X + Width <= Screen.Width) {
+			if (Origin.X + Size.X <= Max.X) {
 
-				if (X + Width >= 0) {
+				if (Origin.X + Size.X >= Min.X) {
 
-					if (Y >= 0 && Y < Screen.Height) {
-						Screen.SymbolAt(X + Width, Y).Foreground = Border.TopRight;
-						Screen.SymbolAt(X + Width, Y).FGColor = Border.FGColor;
-						Screen.SymbolAt(X + Width, Y).BGColor = Border.BGColor;
+					if (Origin.Y >= Min.Y && Origin.Y < Max.Y) {
+						Screen.SymbolAt(Origin.X + Size.X, Origin.Y).Foreground = Border.TopRight;
+						Screen.SymbolAt(Origin.X + Size.X, Origin.Y).FGColor = Border.FGColor;
+						Screen.SymbolAt(Origin.X + Size.X, Origin.Y).BGColor = Border.BGColor;
 					}
 
-					if (Y + Height < Screen.Height && Y + Height >= 0) {
-						Screen.SymbolAt(X + Width, Y + Height).Foreground = Border.BottomRight;
-						Screen.SymbolAt(X + Width, Y + Height).FGColor = Border.FGColor;
-						Screen.SymbolAt(X + Width, Y + Height).BGColor = Border.BGColor;
+					if (Origin.Y + Size.Y < Max.Y && Origin.Y + Size.Y >= Min.Y) {
+						Screen.SymbolAt(Origin.X + Size.X, Origin.Y + Size.Y).Foreground = Border.BottomRight;
+						Screen.SymbolAt(Origin.X + Size.X, Origin.Y + Size.Y).FGColor = Border.FGColor;
+						Screen.SymbolAt(Origin.X + Size.X, Origin.Y + Size.Y).BGColor = Border.BGColor;
 					}
 				}
 			}

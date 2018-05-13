@@ -11,8 +11,10 @@ namespace Malomir.Display {
 
 		public int AllowedLength { get; set; }
 
-		public int X { get; set; } = 0;
-		public int Y { get; set; } = 0;
+
+		public Point Origin { get; set; } = new Point { X = 0, Y = 0 };
+		public Point Min { get; set; } = new Point { X = 0, Y = 0 };
+		public Point Max { get; set; } = new Point { X = 0, Y = 0 };
 
 		private int cursorPosition = 0;
 		private Rectangle currentSymbol;
@@ -28,18 +30,21 @@ namespace Malomir.Display {
 		public Color FGColor { private get; set; }
 
 
-		public SymbolString(int x, int y, int length, String text) {
-			X = x;
-			Y = y;
+		public SymbolString(Point origin, Point min, Point max, int length, String text) {
+
+			Origin = origin;
+			Min = min;
+			Max = max;
+
 			Text = text;
 			AllowedLength = length;
 		}
 
 
 		public void Draw() {
-			if (Y >= 0 && Y < Screen.Height) {
+			if (Origin.Y >= Min.Y && Origin.Y < Max.Y) {
 				foreach (Char c in Text) {
-					if (X + cursorPosition >= 0 && X + cursorPosition < Screen.Width) {
+					if (Origin.X + cursorPosition >= Min.X && Origin.X + cursorPosition < Max.X) {
 						switch (c) {
 
 							case ' ': currentSymbol = Symbol.ASCII.Space; break;
@@ -136,12 +141,12 @@ namespace Malomir.Display {
 							default: currentSymbol = Symbol.ASCII.QuestionMark; break;
 						}
 
-						Screen.SymbolAt(X + cursorPosition, Y).FGColor = FGColor;
-						Screen.SymbolAt(X + cursorPosition, Y).BGColor = BGColor;
+						Screen.SymbolAt(Origin.X + cursorPosition, Origin.Y).FGColor = FGColor;
+						Screen.SymbolAt(Origin.X + cursorPosition, Origin.Y).BGColor = BGColor;
 						if (cursorPosition >= AllowedLength) {
-							Screen.SymbolAt(X + cursorPosition, Y).Foreground = Symbol.ASCII.Underscore;
+							Screen.SymbolAt(Origin.X + cursorPosition, Origin.Y).Foreground = Symbol.ASCII.Underscore;
 							break;
-						} else Screen.SymbolAt(X + cursorPosition, Y).Foreground = currentSymbol;
+						} else Screen.SymbolAt(Origin.X + cursorPosition, Origin.Y).Foreground = currentSymbol;
 					}
 					cursorPosition++;
 

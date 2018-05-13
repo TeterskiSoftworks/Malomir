@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Display\Border.cs" />
+    <Compile Include="Display\Point.cs" />
     <Compile Include="Display\Screen.cs" />
     <Compile Include="Display\Symbol.cs" />
     <Compile Include="Display\SymbolString.cs" />

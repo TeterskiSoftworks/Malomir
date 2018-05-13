@@ -29,7 +29,7 @@ namespace Malomir.Display {
 		/// The Y position of the symbol in the <see cref="Screen"/>.
 		/// </summary>
 		public int Y { get => destination.Y; }
-
+		
 		/// <summary>
 		/// The pixel size of each symbol of the tileset.
 		/// </summary>
