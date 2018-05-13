@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 
 namespace Malomir.Display {
-	public abstract class Element {
+	public abstract class Element : IShowable {
 
 		/// <summary>
 		/// Gets or sets the position <see cref="Point"/>.
@@ -53,9 +53,19 @@ namespace Malomir.Display {
 		/// </summary>
 		/// <param name="border">The <see cref="Border"/> to be set.</param>
 		public void SetBorder(Border border) {
-			Border = border;
-			Title.FGColor = Border.BGColor;
-			Title.BGColor = Border.FGColor;
+
+			Border.Top = border.Top;
+			Border.Left = border.Left;
+			Border.Right = border.Right;
+			Border.Bottom = border.Bottom;
+
+			Border.TopLeft = border.TopLeft;
+			Border.TopRight = border.TopRight;
+			Border.BottomLeft = border.BottomLeft;
+			Border.BottomRight = border.BottomRight;
+			
+			Border.Title.FGColor = Border.FGColor;
+			Border.Title.BGColor = Border.BGColor;
 		}
 
 		/// <summary>
@@ -63,6 +73,25 @@ namespace Malomir.Display {
 		/// It does not draw the <see cref="Element"/>.
 		/// </summary>
 		public abstract void Show();
+
+		/// <summary>
+		/// Adds the <see cref="Elements"/>'s background visual information to the <see cref="Screen"/>.
+		/// </summary>
+		public void ShowBackground() {
+			for (int y = (Pos.Y > Min.Y ? Pos.Y : Min.Y); (y <= Pos.Y + Size.Y) && (y <= Max.Y); y++) {
+
+				for (int x = (Pos.X > Min.X ? Pos.X : Min.X); (x <= Pos.X + Size.X) && (x <= Max.X); x++) {
+					if (GetType() == typeof(Button)) {
+						int a = 2;
+					}
+					Screen.SymbolAt(x, y).BGColor = BGColor;
+					Screen.SymbolAt(x, y).FGColor = FGColor;
+					Screen.SymbolAt(x, y).Foreground = Foreground;
+					Screen.SymbolAt(x, y).Background = Background;
+				}
+			}
+		}
+
 
 	}
 }

@@ -1,46 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="Malomir.Display.Screen" Collapsed="true">
-    <Position X="4.25" Y="5.25" Width="2" />
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Malomir.Display.Button" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAABAEAAgAAAAAAAEAAAAAgAAAAAAACAACAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Display\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Malomir.Display.Element" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAABAAg0AAFEAAAAAAAACVAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Display\Element.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Malomir.Display.Point" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Display\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Malomir.Display.Screen" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAgABEAggAAEAAAAAAAAAAgAAAIAAACAACAAAA=</HashCode>
       <FileName>Display\Screen.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Malomir.Display.Symbol" Collapsed="true">
-    <Position X="4.25" Y="6.75" Width="2" />
-    <NestedTypes>
-      <Struct Name="Malomir.Display.Symbol.ASCII" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Display\Symbol.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Struct>
-    </NestedTypes>
+    <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAABAAAAgAAAAAAAEAAAAARAAEAAAAABAAgYAA=</HashCode>
+      <HashCode>AAAAACAAAAAAggAAAAAAAAAAAAARAAEAAAAgBAAgYAA=</HashCode>
       <FileName>Display\Symbol.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Malomir.Display.Window" Collapsed="true">
-    <Position X="4.25" Y="6" Width="1.5" />
+  <Class Name="Malomir.Display.SymbolString" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAAABAAAAAAEAAAAABAAACVACQAAAAACAAAAAA=</HashCode>
+      <FileName>Display\SymbolString.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Malomir.Display.Window" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAQAAAAAQAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Display\Window.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Malomir.Main" Collapsed="true">
-    <Position X="4.25" Y="3.5" Width="2.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAEAAAAAAAAwAAAAAAAAAAAAAAAAgAQAAAAAAAAAQ=</HashCode>
       <FileName>Main.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Malomir.Program" Collapsed="true">
-    <Position X="4.25" Y="4.5" Width="1.5" />
+    <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Struct Name="Malomir.Display.Border" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAIAAAAYJAAAAAQAAAAAAAZAAAACACAAIAAAEA=</HashCode>
+      <FileName>Display\Border.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Malomir.Display.IShowable" Collapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAVAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Display\IShowable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

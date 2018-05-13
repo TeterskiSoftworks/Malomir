@@ -6,7 +6,8 @@ namespace Malomir.Display {
 	/// <summary>
 	/// Represents a string of <see cref="Symbol"/>'s.
 	/// </summary>
-	public class SymbolString {
+	/// <seealso cref="IShowable" />
+	public class SymbolString : IShowable{
 
 		/// <summary>
 		/// Gets or sets the text of the string.
@@ -48,12 +49,12 @@ namespace Malomir.Display {
 		/// <summary>
 		/// The background color of the <see cref="Symbol"/>.
 		/// </summary>
-		public Color BGColor { private get; set; }
+		public Color BGColor { get; set; }
 
 		/// <summary>
 		/// The foreground color of the <see cref="Symbol"/>.
 		/// </summary>
-		public Color FGColor { private get; set; }
+		public Color FGColor { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SymbolString"/> class.
@@ -85,8 +86,8 @@ namespace Malomir.Display {
 
 						Screen.SymbolAt(Pos.X + cursorPosition, Pos.Y).FGColor = FGColor;
 						Screen.SymbolAt(Pos.X + cursorPosition, Pos.Y).BGColor = BGColor;
-						if (cursorPosition >= AllowedLength) {
-							Screen.SymbolAt(Pos.X + cursorPosition, Pos.Y).Foreground = Symbol.ASCII.Underscore;
+						if (cursorPosition > AllowedLength) {
+							Screen.SymbolAt(Pos.X + cursorPosition - 1, Pos.Y).Foreground = Symbol.ASCII.Underscore;
 							break;
 						} else Screen.SymbolAt(Pos.X + cursorPosition, Pos.Y).Foreground = currentSymbol;
 					}

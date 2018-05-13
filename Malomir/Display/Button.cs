@@ -4,6 +4,8 @@ namespace Malomir.Display {
 
 	public class Button : Element{
 
+		public new SymbolString Title { get => Border.Title; set => Border.Title = value; }
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Button"/> class.
 		/// </summary>
@@ -19,13 +21,17 @@ namespace Malomir.Display {
 			Min = min;
 			Max = max;
 
-			Title = new SymbolString(Pos.Move(1, 0), Min, Max, Size.X, title);
+			Border = new Border(Pos, Size, Min, Max);
+			Title = new SymbolString(Pos.Move(1, 1), Min, Max, Size.X-2, title);
 
 			SetBorder(Border.DefaultButtonBorder);
 		}
 
 		public override void Show() {
-			throw new NotImplementedException();
+			ShowBackground();
+			Border.Show();
 		}
+
+
 	}
 }

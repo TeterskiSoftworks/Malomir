@@ -6,7 +6,7 @@ namespace Malomir.Display {
 	/// The smallest element that can be displayed on <see cref="Screen"/>.
 	/// Think of it as a character on a terminal.
 	/// </summary>
-	public class Symbol{
+	public class Symbol : IColorable{
 
 		#region Declorations
 
@@ -48,12 +48,12 @@ namespace Malomir.Display {
 		/// <summary>
 		/// The background color of the <see cref="Symbol"/>.
 		/// </summary>
-		public Color BGColor { private get; set; }
+		public Color BGColor { get; set; }
 
 		/// <summary>
 		/// The foreground color of the <see cref="Symbol"/>.
 		/// </summary>
-		public Color FGColor { private get; set; }
+		public Color FGColor { get; set; }
 
 		#endregion
 

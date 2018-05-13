@@ -75,13 +75,16 @@ namespace Malomir.Display {
 			}
 
 			window = new Window(Point.Zero, Size.Move(-1, -1), Min, Max, "Hello World!") {
-				BGColor = Color.Red
+				BGColor = Color.Gray
 			};
 
-			window2 = new Window(Point.Zero.Move(4, 4), Size, window.Min, window.Max, "Test") {
-				BGColor = Color.Green,
+			window2 = new Window(Point.Zero.Move(-1, -14), Size, window.Min, window.Max, "Sub Window") {
+				BGColor = Color.White
 			};
 			window2.SetBorder(Border.DefaultSubWindowBorder);
+
+			Button button = new Button(window2.Pos.Move(44, 24), new Point(7, 2), window2.Pos, window2.Pos.Move(window2.Size.X, window2.Size.Y), "Button");
+			window2.AddElement(button);
 
 			window.AddElement(window2);
 
