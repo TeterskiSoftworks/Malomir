@@ -16,7 +16,14 @@ namespace Malomir.Display {
 		/// </summary> <value> The height. </value>
 		public static Point Size { get; private set; } = new Point{X = 32, Y = 32};
 
+		/// <summary>
+		/// A point that contains the minimum X and Y values that are visible.
+		/// </summary>
 		public static Point Min { get => Point.Zero; }
+
+		/// <summary>
+		/// A point that contains the maximum X and Y values that are visible.
+		/// </summary>
 		public static Point Max { get => Size; }
 
 		/// <summary>
@@ -30,11 +37,13 @@ namespace Malomir.Display {
 		/// </summary>
 		private static Symbol[,] symbols;
 
-
+		/// <summary>
+		/// The main window of the screen. All other windows are contained within it.
+		/// </summary>
 		private static Window window;
 
 		#endregion
-
+		
 
 		/// <summary> Initializes the <see cref="Screen"/> to default settings. </summary>
 		/// <param name="graphics"> The <see cref="GraphicsDeviceManager"/> used in <see cref="Main"/>. </param>
@@ -66,6 +75,7 @@ namespace Malomir.Display {
 				BGColor = Color.Red
 			};
 		}
+
 
 		/// <summary> Loads the tileset. </summary>
 		/// <param name="tileset"> The tileset. </param>

@@ -63,8 +63,8 @@ namespace Malomir.Display {
 		#endregion
 
 		/// <summary> Creates an instance of the Symbol class. </summary>
-		/// <param name="x">The symbols X position in the <see cref="Screen"/>. </param>
-		/// <param name="y">The symbols Y position in the <see cref="Screen"/>. </param>
+		/// <param name="x"> The symbol's X position in the <see cref="Screen"/>. </param>
+		/// <param name="y"> The symbol's Y position in the <see cref="Screen"/>. </param>
 		public Symbol(int x, int y) {
 
 			BGColor = Color.Black;
@@ -75,6 +75,13 @@ namespace Malomir.Display {
 			//foreground = new Rectangle(x * tilesetWidth, y * tilesetHeight, tilesetWidth, tilesetHeight);
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="Symbol"/> class.
+		/// </summary>
+		/// <param name="x"> The symbol's X position in the <see cref="Screen"/>.</param>
+		/// <param name="y"> The symbol's Y position in the <see cref="Screen"/>.</param>
+		/// <param name="foreground"> The foreground symbol to be displayd. </param>
+		/// <seealso cref="ASCII"/>
 		public Symbol(int x, int y, Rectangle foreground) {
 			BGColor = Color.Black;
 			FGColor = Color.White;
