@@ -11,14 +11,9 @@ namespace Malomir.Display {
 		#region Declorations
 
 		/// <summary>
-		/// The pixel width of each symbol.
-		/// </summary>
-		public static int Width { get; private set; } = 16;
-
-		/// <summary>
-		/// The pixel height of each symbol.
-		/// </summary>
-		public static int Height { get; private set; } = 16;
+		/// Gets or sets the size in pixels.
+		/// </summary> <value> The height. </value>
+		public static Point Size { get; set; } = new Point { X = 16, Y = 16 };
 
 		/// <summary>
 		/// The X position of the symbol in the <see cref="Screen"/>.
@@ -41,12 +36,12 @@ namespace Malomir.Display {
 		private Rectangle destination;
 
 		/// <summary>
-		/// Gets or sets the foreground image to be displayed from the tileset.
+		/// Gets or sets the foreground <see cref="ASCII"/> to be displayed from the tileset.
 		/// </summary>
 		public Rectangle Foreground { get; set; }
 
 		/// <summary>
-		/// Gets or sets the foreground image to be displayed from the tileset.
+		/// Gets or sets the foreground <see cref="ASCII"/> to be displayed from the tileset.
 		/// </summary>
 		public Rectangle Background { get; set; } = ASCII.FullBlock;
 
@@ -70,7 +65,7 @@ namespace Malomir.Display {
 			BGColor = Color.Black;
 			FGColor = Color.White;
 
-			destination = new Rectangle(x * Width, y * Height, Width, Height);
+			destination = new Rectangle(x * Size.X, y * Size.Y, Size.X, Size.Y);
 			Foreground = ASCII.Nul;
 			//foreground = new Rectangle(x * tilesetWidth, y * tilesetHeight, tilesetWidth, tilesetHeight);
 		}
@@ -86,7 +81,7 @@ namespace Malomir.Display {
 			BGColor = Color.Black;
 			FGColor = Color.White;
 
-			destination = new Rectangle(x * Width, y * Height, Width, Height);
+			destination = new Rectangle(x * Size.X, y * Size.Y, Size.X, Size.Y);
 			Foreground = foreground;
 
 

@@ -50,7 +50,7 @@ namespace Malomir.Display {
 		/// <summary>
 		/// The look of the <see cref="Border"/>.
 		/// </summary>
-		private Border Border = Border.DefaultWindowBorder;
+		private Border Border { get; set; } = Border.DefaultWindowBorder;
 		/// <summary>
 		/// A list of other <see cref="Window"/>s contained inside this <see cref="Window"/>.
 		/// </summary>
@@ -76,41 +76,70 @@ namespace Malomir.Display {
 			Size = size;
 			Min = min;
 			Max = max;
+			
 
 			Name = new SymbolString(Pos.Move(1, 0), Min, Max, Size.X - 2, name) {
 				BGColor = Border.FGColor,
 				FGColor = Border.BGColor
 			};
+		}
 
-			ReDraw();
+		/// <summary>
+		/// Sets the <see cref="Border"/>.
+		/// </summary>
+		/// <param name="border">The <see cref="Border"/> to be set.</param>
+		public void SetBorder(Border border) {
+			Border = border;
+			Name.FGColor = Border.BGColor;
+			Name.BGColor = Border.FGColor;
 		}
 
 
-		public void ReDraw() {
+		/// <summary>
+		/// Adds a <see cref="Window"/> inside this <see cref="Window"/>.
+		/// </summary>
+		/// <param name="window">The <see cref="Window"/> to be added.</param>
+		public void AddWindow(Window window) {
+			windows.Add(window);
+			window.Max = Max.Move(-1,-1);
+			window.Min = Min.Move(1, 1);
+		}
 
-			ReDrawBackground();
+		/// <summary>
+		/// Adds the <see cref="Window"/>'s visual information to the <see cref="Screen"/>.
+		/// It does not draw the <see cref="Window"/>.
+		/// </summary>
+		public void Show() {
+
+			ShowBackground();
 
 			foreach (Window w in windows) {
-				w.ReDraw();
+				w.Show();
 			}
+
+			ShowBorder();
 		}
 
-		private void ReDrawBackground() {
+		/// <summary>
+		/// Adds the <see cref="Window"/>'s background visual information to the <see cref="Screen"/>.
+		/// </summary>
+		private void ShowBackground() {
 
-			for(int y = (Pos.Y > Min.Y ? Pos.Y : Min.Y); (y < Pos.Y + Size.Y) && (y < Max.Y); y++) {
+			for(int y = (Pos.Y > Min.Y ? Pos.Y : Min.Y); (y <= Pos.Y + Size.Y) && (y <= Max.Y); y++) {
 
-				for (int x = (Pos.X > Min.X ? Pos.X : Min.X);  (x < Pos.X + Size.X) && (x < Max.X); x++) {
+				for (int x = (Pos.X > Min.X ? Pos.X : Min.X);  (x <= Pos.X + Size.X) && (x <= Max.X); x++) {
 					Screen.SymbolAt(x, y).BGColor = BGColor;
 					Screen.SymbolAt(x, y).FGColor = FGColor;
 					Screen.SymbolAt(x, y).Foreground = Foreground;
 					Screen.SymbolAt(x, y).Background = Background;
 				}
 			}
-
-			ReDrawBorder();
 		}
 
-		private void ReDrawBorder() {
+		/// <summary>
+		/// Adds the <see cref="Border"/>'s visual information to the <see cref="Screen"/>.
+		/// </summary>
+		private void ShowBorder() {
 
 			if (!Border.Enabled) return;
 
@@ -119,7 +148,7 @@ namespace Malomir.Display {
 			//top and bottom
 			for (int i = (Pos.X + 1 > Min.X ? Pos.X + 1: Min.X); (i < Pos.X + Size.X) && (i < Max.X); i++) {
 
-				if (Pos.Y + Size.Y < Max.Y && Pos.Y + Size.Y >= Min.Y) {
+				if (Pos.Y + Size.Y <= Max.Y && Pos.Y + Size.Y >= Min.Y) {
 					Screen.SymbolAt(i, Pos.Y + Size.Y).Foreground = Border.Bottom;
 					Screen.SymbolAt(i, Pos.Y + Size.Y).FGColor = Border.FGColor;
 					Screen.SymbolAt(i, Pos.Y + Size.Y).BGColor = Border.BGColor;
@@ -137,7 +166,7 @@ namespace Malomir.Display {
 			//left and right
 			for (int i = (Pos.Y + 1 > Min.Y ? Pos.Y + 1 : Min.Y); (i < Pos.Y + Size.Y) && (i < Max.Y); i++) {
 
-				if (Pos.X + Size.X < Max.X && Pos.X + Size.X >= Min.X) {
+				if (Pos.X + Size.X <= Max.X && Pos.X + Size.X >= Min.X) {
 					Screen.SymbolAt(Pos.X + Size.X, i).Foreground = Border.Right;
 					Screen.SymbolAt(Pos.X + Size.X, i).FGColor = Border.FGColor;
 					Screen.SymbolAt(Pos.X + Size.X, i).BGColor = Border.BGColor;
@@ -162,7 +191,7 @@ namespace Malomir.Display {
 						Screen.SymbolAt(Pos.X, Pos.Y).BGColor = Border.BGColor;
 					}
 
-					if (Pos.Y + Size.Y < Max.Y && Pos.Y + Size.Y >= 0) {
+					if (Pos.Y + Size.Y <= Max.Y && Pos.Y + Size.Y >= 0) {
 						Screen.SymbolAt(Pos.X, Pos.Y + Size.Y).Foreground = Border.BottomLeft;
 						Screen.SymbolAt(Pos.X, Pos.Y + Size.Y).FGColor = Border.FGColor;
 						Screen.SymbolAt(Pos.X, Pos.Y + Size.Y).BGColor = Border.BGColor;
@@ -180,7 +209,7 @@ namespace Malomir.Display {
 						Screen.SymbolAt(Pos.X + Size.X, Pos.Y).BGColor = Border.BGColor;
 					}
 
-					if (Pos.Y + Size.Y < Max.Y && Pos.Y + Size.Y >= Min.Y) {
+					if (Pos.Y + Size.Y <= Max.Y && Pos.Y + Size.Y >= Min.Y) {
 						Screen.SymbolAt(Pos.X + Size.X, Pos.Y + Size.Y).Foreground = Border.BottomRight;
 						Screen.SymbolAt(Pos.X + Size.X, Pos.Y + Size.Y).FGColor = Border.FGColor;
 						Screen.SymbolAt(Pos.X + Size.X, Pos.Y + Size.Y).BGColor = Border.BGColor;

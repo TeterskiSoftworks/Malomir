@@ -14,7 +14,7 @@ namespace Malomir.Display {
 		/// <summary>
 		/// Gets or sets the size in <seealso cref="Symbol"/>s.
 		/// </summary> <value> The height. </value>
-		public static Point Size { get; private set; } = new Point{X = 32, Y = 32};
+		public static Point Size { get; private set; } = new Point{X = 50, Y = 50};
 
 		/// <summary>
 		/// A point that contains the minimum X and Y values that are visible.
@@ -42,6 +42,9 @@ namespace Malomir.Display {
 		/// </summary>
 		private static Window window;
 
+
+		private static Window window2;
+
 		#endregion
 		
 
@@ -61,8 +64,8 @@ namespace Malomir.Display {
 			
 			symbols = new Symbol[Size.Y, Size.X];
 			
-			graphics.PreferredBackBufferHeight = Size.Y * Symbol.Height;
-			graphics.PreferredBackBufferWidth = Size.X * Symbol.Width;
+			graphics.PreferredBackBufferHeight = Size.Y * Symbol.Size.Y;
+			graphics.PreferredBackBufferWidth = Size.X * Symbol.Size.X;
 			graphics.ApplyChanges();
 
 			for (int y = 0; y < Size.Y; y++) {
@@ -74,6 +77,15 @@ namespace Malomir.Display {
 			window = new Window(Point.Zero, Size.Move(-1, -1), Min, Max, "Hello World!") {
 				BGColor = Color.Red
 			};
+
+			window2 = new Window(Point.Zero.Move(4, 4), Size, window.Min, window.Max, "Test") {
+				BGColor = Color.Green,
+			};
+			window2.SetBorder(Border.DefaultSubWindowBorder);
+
+			window.AddWindow(window2);
+
+			window.Show();
 		}
 
 
@@ -94,7 +106,6 @@ namespace Malomir.Display {
 				}
 			}
 		}
-
 
 		/// <summary> Gets the <see cref="Symbol"/> at the specified <see cref="Screen"/> position. </summary>
 		/// <param name="x"> The x poisition of the <see cref="Symbol"/> on <see cref="Screen"/>. </param>

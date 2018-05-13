@@ -28,6 +28,21 @@ namespace Malomir.Display {
 
 		};
 
+		public static Border DefaultSubWindowBorder { get; } = new Border {
+			Enabled = true,
+			FGColor = Color.Yellow,
+			BGColor = Color.Black,
+			Top = Symbol.ASCII.HorizontalDouble,
+			Left = Symbol.ASCII.VerticalSingle,
+			Right = Symbol.ASCII.VerticalSingle,
+			Bottom = Symbol.ASCII.HorizontalSingle,
+			TopLeft = Symbol.ASCII.DownSingleRightDouble,
+			TopRight = Symbol.ASCII.DownSingleLeftDouble,
+			BottomLeft = Symbol.ASCII.UpSingleRightSingle,
+			BottomRight = Symbol.ASCII.UpSingleLeftSingle
+
+		};
+
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Border"/> is enabled.
 		/// </summary>
