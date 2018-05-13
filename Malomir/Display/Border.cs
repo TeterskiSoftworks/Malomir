@@ -28,6 +28,27 @@ namespace Malomir.Display {
 
 		};
 
+		/// <summary>
+		/// Gets the default <see cref="Button"/> <see cref="Border"/>.
+		/// </summary>
+		/// <value>
+		/// The default <see cref="Button"/> <see cref="Border"/>.
+		/// </value>
+		public static Border DefaultButtonBorder { get; } = new Border {
+			Enabled = true,
+			FGColor = Color.White,
+			BGColor = Color.Blue,
+			Top = Symbol.ASCII.HorizontalDouble,
+			Left = Symbol.ASCII.VerticalSingle,
+			Right = Symbol.ASCII.VerticalSingle,
+			Bottom = Symbol.ASCII.HorizontalSingle,
+			TopLeft = Symbol.ASCII.DownSingleRightDouble,
+			TopRight = Symbol.ASCII.DownSingleLeftDouble,
+			BottomLeft = Symbol.ASCII.UpSingleRightSingle,
+			BottomRight = Symbol.ASCII.UpSingleLeftSingle
+
+		};
+
 		public static Border DefaultSubWindowBorder { get; } = new Border {
 			Enabled = true,
 			FGColor = Color.Yellow,

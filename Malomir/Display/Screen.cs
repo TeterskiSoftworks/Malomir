@@ -83,7 +83,7 @@ namespace Malomir.Display {
 			};
 			window2.SetBorder(Border.DefaultSubWindowBorder);
 
-			window.AddWindow(window2);
+			window.AddElement(window2);
 
 			window.Show();
 		}

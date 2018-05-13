@@ -98,7 +98,9 @@ namespace Malomir.Display {
 		/// <summary>
 		/// Contains the locations (as <see cref="Microsoft.Xna.Framework.Rectangle"/>s) of each tileset symbol.
 		/// </summary>
-		public struct ASCII {
+		public static class ASCII {
+
+			#region Declorations
 
 			#region Row 0			
 			/// <summary> Nul character.</summary>
@@ -660,6 +662,113 @@ namespace Malomir.Display {
 			/// <summary>No-break sapce</summary>
 			public static Rectangle NoBreakSpace { get; } = new Rectangle(15 * tilesetWidth, 15 * tilesetHeight, tilesetWidth, tilesetHeight);
 			#endregion
+
+			#endregion
+
+			/// <summary>
+			/// Converts the specified char to an <see cref="ASCII"/> property.
+			/// </summary>
+			/// <param name="c"> The character to be converted. </param>
+			/// <returns> The <see cref="ASCII"/> equivelent. </returns>
+			public static Rectangle Convert(char c) {
+
+				switch (c) {
+
+					case ' ': return Space;
+					case '.': return Period;
+					case '_': return Underscore;
+					case '!': return Exclamation;
+					case '@': return AtSign;
+					case '#': return Hash;
+					case '$': return Dollar; 
+					case '%': return Percent; 
+					case '^': return Circumflex; 
+					case '&': return Ampersand; 
+					case '*': return Asterisk; 
+					case '(': return LeftParenthesis; 
+					case ')': return RightParenthesis; 
+					case '[': return LeftBracket; 
+					case ']': return RightBracket; 
+					case '{': return LeftBrace; 
+					case '}': return RightBrace; 
+					case '<': return LeftAngleBracket; 
+					case '>': return RightAngleBracket; 
+
+					#region Numbers
+					case '0': return Zero; 
+					case '1': return One; 
+					case '2': return Two; 
+					case '3': return Three; 
+					case '4': return Four; 
+					case '5': return Five; 
+					case '6': return Six; 
+					case '7': return Seven; 
+					case '8': return Eight; 
+					case '9': return Nine; 
+					#endregion
+
+					#region Uppercase
+					case 'A': return UppercaseA; 
+					case 'B': return UppercaseB; 
+					case 'C': return UppercaseC; 
+					case 'D': return UppercaseD; 
+					case 'E': return UppercaseE; 
+					case 'F': return UppercaseF; 
+					case 'G': return UppercaseG; 
+					case 'H': return UppercaseH; 
+					case 'I': return UppercaseI; 
+					case 'J': return UppercaseJ; 
+					case 'K': return UppercaseK; 
+					case 'L': return UppercaseL; 
+					case 'M': return UppercaseM; 
+					case 'N': return UppercaseN; 
+					case 'O': return UppercaseO; 
+					case 'P': return UppercaseP; 
+					case 'Q': return UppercaseQ; 
+					case 'R': return UppercaseR; 
+					case 'S': return UppercaseS; 
+					case 'T': return UppercaseT; 
+					case 'U': return UppercaseU; 
+					case 'V': return UppercaseV; 
+					case 'W': return UppercaseW; 
+					case 'X': return UppercaseX; 
+					case 'Y': return UppercaseY; 
+					case 'Z': return UppercaseZ; 
+					#endregion
+
+					#region Lowercase
+					case 'a': return LowercaseA; 
+					case 'b': return LowercaseB; 
+					case 'c': return LowercaseC; 
+					case 'd': return LowercaseD; 
+					case 'e': return LowercaseE; 
+					case 'f': return LowercaseF; 
+					case 'g': return LowercaseG; 
+					case 'h': return LowercaseH; 
+					case 'i': return LowercaseI; 
+					case 'j': return LowercaseJ; 
+					case 'k': return LowercaseK; 
+					case 'l': return LowercaseL; 
+					case 'm': return LowercaseM; 
+					case 'n': return LowercaseN; 
+					case 'o': return LowercaseO; 
+					case 'p': return LowercaseP; 
+					case 'q': return LowercaseQ; 
+					case 'r': return LowercaseR; 
+					case 's': return LowercaseS; 
+					case 't': return LowercaseT; 
+					case 'u': return LowercaseU; 
+					case 'v': return LowercaseV; 
+					case 'w': return LowercaseW; 
+					case 'x': return LowercaseX; 
+					case 'y': return LowercaseY; 
+					case 'z': return LowercaseZ; 
+					#endregion
+
+				}
+
+				return QuestionMark;
+			}
 		}
 	}
 }
